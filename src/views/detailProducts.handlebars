@@ -1,0 +1,26 @@
+<div>
+    <h1>Detalles del Producto</h1>
+    <div>
+        <h3>{{product.titulo}}</h3>
+        <ul>
+            <li>Descripción: {{product.descripcion}}</li>
+            <li>Precio: {{product.precio}}</li>
+            <li>Thumbnail: {{product.thumbnail}}</li>
+            <li>Categoria: {{product.categoria}}</li>
+            <li>Code: {{product.code}}</li>
+            <li>Stock: {{product.stock}}</li>
+            <li>Disponible: {{product.disponible}}</li>
+        </ul>
+    </div>
+    <form action="/carts/{{cartId}}/product/{{product._id}}" method="POST">
+        <button type="submit" onclick="showAlert()">Agregar al carrito</button>
+    </form>
+    <br />
+    <a href="/products">Volver a la lista de productos</a>
+</div>
+
+<script>
+    function showAlert() {
+    alert("¡Producto agregado al carrito!");
+}
+</script>

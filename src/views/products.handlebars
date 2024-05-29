@@ -1,0 +1,59 @@
+<h2>Perfil de Usuario</h2>
+<p>Nombre: {{user.first_name}}</p>
+<p>Apellido: {{user.last_name}}</p>
+<p>Email: {{user.email}}</p>
+<p>Edad: {{user.age}}</p>
+
+{{#if user.isAdmin}}
+    <h2>Rol: administrador</h2>
+{{else}}
+    <h2>Rol: usuario</h2>
+{{/if}}
+
+<form action="/api/sessions/logout" method="POST">
+    <button type="submit">Cerrar Sesión</button>
+</form>
+
+<br><br><br>
+
+{{#if products.length}}
+<div>
+    <a href="/carts/{{cartId}}" class="btn">Ver Carrito</a>
+    {{#each products}}
+    <div>
+        <h3><a href="/products/{{this._id}}">{{this.titulo}}</a></h3>
+        <ul>
+            <li>Descripción: {{this.descripcion}} </li>
+            <li>Precio: {{this.precio}} </li>
+            <li>Categoria: {{this.categoria}} </li>
+            <li>Stock: {{this.stock}} </li>
+            <li>Disponible: {{this.disponible}} </li>
+        </ul>
+        <form id="addToCartForm_{{this._id}}" class="addToCartForm" action="/carts/{{../cartId}}/product/{{this._id}}" method="POST">
+            <button type="submit" onclick="showAlert()">Agregar al carrito</button>
+        </form>
+    </div>
+    <br />
+    {{/each}}
+</div>
+<br />
+<div>
+    {{#if prevLink}}
+    <a href="{{prevLink}}"><< Anterior</a>
+    {{/if}}
+    &nbsp;
+    Página: {{page}}
+    &nbsp;
+    {{#if nextLink}}
+    <a href="{{nextLink}}">Siguiente >></a>
+    {{/if}}
+</div>
+{{else}}
+<h1>No hay productos para mostrar</h1>
+{{/if}}
+
+<script>
+    function showAlert() {
+    alert("¡Producto agregado al carrito!");
+}
+</script>
